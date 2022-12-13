@@ -4,6 +4,7 @@ import className from "classnames";
 //Wrapper Element
 function Button({
   children,
+  inactive,
   primary,
   secondary,
   success,
@@ -12,22 +13,28 @@ function Button({
   outline,
   rounded,
 }) {
-  //Setting the className using tailwind to each one of the props
-  const finalClassName = className({
-    "bg-blue-600": primary,
-    "bg-black": secondary,
-    "bg-green-500": success,
-    "bg-red-500": danger,
-    "bg-yellow-400": warning,
-    "rounded-3xl": rounded,
-  });
+  //Setting the className conditionally using tailwind to each one of the props
+  const theClass = className(
+    "flex items-center justify-center m-3 p-3 cursor-pointer ",
+    {
+      "bg-white border-2 border-gray-900": inactive,
+      "border-blue-500 bg-blue-500 border-2  text-white": primary,
+      "bg-gray-900 border-2 border-gray-900 text-white": secondary,
+      "bg-green-500 border-2 border-green-500 text-white": success,
+      "bg-red-500 border-2 border-red-500 text-white": danger,
+      "bg-yellow-300 border-2 border-yellow-300": warning,
+      "rounded-full": rounded,
+      "button-outlined": outline,
+      "text-gray-900 ": outline && secondary,
+      "text-blue-500 ": outline && primary,
+      "text-green-500": outline && success,
+      "text-red-500": outline && danger,
+      "text-yellow-300": outline && warning,
+    }
+  );
 
   //Underlying Element/Wrapped element
-  return (
-    <button className={`${finalClassName} text-white m-3 p-3 cursor-pointer`}>
-      {children}
-    </button>
-  );
+  return <button className={`${theClass}`}>{children}</button>;
 }
 
 //Checking if there are conflicting variation props using prop-types library
