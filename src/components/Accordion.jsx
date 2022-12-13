@@ -11,9 +11,13 @@ function Accordion({ items }) {
     const isExpanded = index === expandedIndex; //True or false
 
     //Creating a conditional rendering variable to show the div with the content only if isExpanded is true. If it's not react will no render anything
-
+    //isExpanded && <div>{ite.content}</div>
     return (
-      <div key={item.id}>
+      <div
+        className="border-2 cursor-pointer"
+        key={item.id}
+        onClick={() => setExpandedIndex(index)}
+      >
         <h3>{item.label}</h3>
         {isExpanded && <div>{item.content}</div>}
       </div>
