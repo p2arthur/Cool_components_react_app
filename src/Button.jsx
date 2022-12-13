@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import className from "classnames";
 
 //Wrapper Element
@@ -12,10 +11,13 @@ function Button({
   warning,
   outline,
   rounded,
+  //Making the button component by taking every prop like onClick, onMouseEnter... passed to the component directly to the plain button element as event listeners
+  ...rest
 }) {
   //Setting the className conditionally using tailwind to each one of the props
   const theClass = className(
-    "flex items-center justify-center m-3 p-3 cursor-pointer ",
+    rest.className,
+    "flex items-center justify-center m-3 p-3 cursor-pointer h-9",
     {
       "bg-white border-2 border-gray-900": inactive,
       "border-blue-500 bg-blue-500 border-2  text-white": primary,
@@ -34,7 +36,11 @@ function Button({
   );
 
   //Underlying Element/Wrapped element
-  return <button className={`${theClass}`}>{children}</button>;
+  return (
+    <button {...rest} className={`${theClass}`}>
+      {children}
+    </button>
+  );
 }
 
 //Checking if there are conflicting variation props using prop-types library
