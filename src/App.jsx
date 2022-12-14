@@ -1,32 +1,35 @@
 import ButtonPage from "./pages/ButtonPage";
-import Accordion from "./components/Accordion";
+import AccordionPage from "./pages/AccordionPage";
+
+import { useState } from "react";
+import Dropdown from "./components/Dropdown";
+
+const dropDownOptions = [
+  { label: "Red", value: "red" },
+  { label: "Blue", value: "blue" },
+  { label: "Green", value: "green" },
+];
 
 function App() {
-  //Defining some dumb data to put inside my accordion
-  const items = [
-    {
-      label: "Will I learn Javascript?",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque.",
-      id: 1,
-    },
-    {
-      label: "Will I learn HTML?",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque.",
-      id: 2,
-    },
-    {
-      label: "Will I learn CSS?",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque.",
-      id: 3,
-    },
-  ];
+  //Defining a broad piece of state to define what option was selected on the dropdown - Option or null
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  //Defining broad handler to define the selected item on our dropdown component
+  const handleSelect = (option) => {
+    setSelectedOption(option);
+  };
+
+  const content = selectedOption ? selectedOption.label : "";
 
   return (
-    <div>
-      <Accordion items={items} />
+    <div className="flex justify-between m-5">
+      <Dropdown
+        className="inline-block"
+        onSelection={handleSelect}
+        selectedOption={selectedOption}
+        options={dropDownOptions}
+      />
+      Selected option: {content}
     </div>
   );
 }
