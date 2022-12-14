@@ -7,10 +7,16 @@ import { BiCaretDown, BiLeftArrow } from "react-icons/bi";
 //Creating the accordion component
 function Accordion({ items }) {
   //Defining the state of the index of the expanded accordion to be setted when the user clicks on one item of the list
-  const [expandedIndex, setExpandedIndex] = useState(1);
+  const [expandedIndex, setExpandedIndex] = useState(-1);
 
   //Defining a handleClick outside of the mapping function that receives a nextIndex as argument - The nextIndex parameter is used inside the mapping function that passes the current index as argument to this function so it can set the Expanded index
-  const handleClick = (nextIndex) => setExpandedIndex(nextIndex);
+  const handleClick = (nextIndex) => {
+    if (nextIndex === expandedIndex) {
+      setExpandedIndex(-1);
+    } else {
+      setExpandedIndex(nextIndex);
+    }
+  };
 
   //Mapping through the faqResponse items to create a list of renders
   const renderedItems = items.map((item, index) => {
