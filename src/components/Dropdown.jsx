@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Dropdown({ options, onSelection, selectedOption }) {
+import Panel from "./Panel";
+
+import { FiChevronDown } from "react-icons/fi";
+
+function Dropdown({ options, onChange, value }) {
   //Defining a local piece of state to define if the dropdown is opened or closed - Boolean
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    const handler = (event) => {
+      console.log(event.target);
+    };
+
+    //Adding an event listener on the document during the capturing phase - That's why the third argument is true
+    document.addEventListener("click", handler, true);
+  }, []);
 
   const handleClick = (event) => {
     setIsOpen(!isOpen);
@@ -12,14 +25,14 @@ function Dropdown({ options, onSelection, selectedOption }) {
     //Set the state isOpen to false, closing the dropdown
     setIsOpen(!isOpen);
     //Passing the selected value to the parent component through the handle select subscriber
-    onSelection(option);
+    onChange(option);
   };
 
   const renderedOptions = options.map((option) => {
     return (
       <div
         onClick={() => handleOptionClick(option)}
-        className="border-b-2 border-gray-200 cursor-pointer w-20"
+        className="hover:bg-sky-100 rounded cursor-pointer"
         key={option.value}
       >
         {option.label}
@@ -28,14 +41,14 @@ function Dropdown({ options, onSelection, selectedOption }) {
   });
 
   return (
-    <div>
-      <div
+    <div className="w-48 relative">
+      <Panel
         onClick={handleClick}
-        className="cursor-pointer bg-gray-200 w-60 rounded-tl rounded-tr"
+        className="flex justify-between items-center cursor-pointer"
       >
-        {selectedOption ? selectedOption.label : "Select..."}
-      </div>
-      {isOpen ? <div className="bg-gray-100">{renderedOptions}</div> : ""}
+        {value?.label || "Select..."} <FiChevronDown />
+      </Panel>
+      {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
     </div>
   );
 }

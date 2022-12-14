@@ -14,7 +14,7 @@ function App() {
   //Defining a broad piece of state to define what option was selected on the dropdown - Option or null
   const [selectedOption, setSelectedOption] = useState(null);
 
-  //Defining broad handler to define the selected item on our dropdown component
+  //Defining broad callback to define the selected item on our dropdown component
   const handleSelect = (option) => {
     setSelectedOption(option);
   };
@@ -22,14 +22,14 @@ function App() {
   const content = selectedOption ? selectedOption.label : "";
 
   return (
-    <div className="flex justify-between m-5">
+    <div className="flex m-4">
       <Dropdown
         className="inline-block"
-        onSelection={handleSelect}
-        selectedOption={selectedOption}
+        onChange={handleSelect}
+        value={selectedOption}
         options={dropDownOptions}
       />
-      Selected option: {content}
+      <div>Selected Color: {selectedOption?.label || "none"}</div>
     </div>
   );
 }
