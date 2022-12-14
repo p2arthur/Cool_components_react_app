@@ -7,19 +7,19 @@ function App() {
     {
       label: "Will I learn Javascript?",
       content:
-        "Yeah you will learn javascript! Yeah you will learn javascript! Yeah you will learn javascript! Yeah you will learn javascript!Yeah you will learn javascript!",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque.",
       id: 1,
     },
     {
       label: "Will I learn HTML?",
       content:
-        "Yeah you will learn HTML! Yeah you will learn HTML! Yeah you will learn HTML! Yeah you will learn HTML!Yeah you will learn HTML!Yeah you will learn HTML!",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque.",
       id: 2,
     },
     {
       label: "Will I learn CSS?",
       content:
-        "Yeah you learn CSS! Yeah you learn CSS! Yeah you learn CSS! Yeah you learn CSS! Yeah you learn CSS! Yeah you learn CSS! Yeah you learn CSS!",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi harum minima eveniet aliquam ipsa a magnam ullam laudantium? Omnis optio dolorum corporis aliquam soluta ipsam perferendis doloribus nam blanditiis atque.",
       id: 3,
     },
   ];
