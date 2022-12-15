@@ -22,14 +22,20 @@ function App() {
   const content = selectedOption ? selectedOption.label : "";
 
   return (
-    <div className="flex m-4">
+    <div className="flex m-4 items-center">
       <Dropdown
-        className="inline-block"
         onChange={handleSelect}
         value={selectedOption}
         options={dropDownOptions}
       />
-      <div>Selected Color: {selectedOption?.label || "none"}</div>
+      <Dropdown
+        onChange={handleSelect}
+        value={selectedOption}
+        options={dropDownOptions}
+      />
+      <div className="ml-5">
+        Selected Color: {selectedOption?.label || "none"}
+      </div>
     </div>
   );
 }

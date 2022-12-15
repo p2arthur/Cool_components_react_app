@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Panel from "./Panel";
 
@@ -8,13 +8,28 @@ function Dropdown({ options, onChange, value }) {
   //Defining a local piece of state to define if the dropdown is opened or closed - Boolean
   const [isOpen, setIsOpen] = useState(true);
 
+  //Creating a reference to the div that was created by the Dropdown Component - Passed into the main div created by the dropdown
+  const divEl = useRef();
+
+  //useEffect to set a new handler function to be executed when user clicks outside of the dropdown
   useEffect(() => {
-    const handler = (event) => {
-      console.log(event.target);
+    const documentEventHandler = (event) => {
+      //Guard clause in case the ref element doesn't exist anymore
+      if (!divEl) return;
+
+      //Check if the click happened outside of our referenced element
+      if (!divEl.current.contains(event.target)) {
+        setIsOpen(false);
+      }
     };
 
-    //Adding an event listener on the document during the capturing phase - That's why the third argument is true
-    document.addEventListener("click", handler, true);
+    //Setting an eventlistener into the document whenever our component is first rendered
+    document.addEventListener("click", documentEventHandler, true);
+
+    //Returning a cleanup function for whenever the Dropdown components is not shown anymore
+    return () => {
+      document.removeEventListener("click", documentEventHandler);
+    };
   }, []);
 
   const handleClick = (event) => {
@@ -24,7 +39,7 @@ function Dropdown({ options, onChange, value }) {
   const handleOptionClick = (option) => {
     //Set the state isOpen to false, closing the dropdown
     setIsOpen(!isOpen);
-    //Passing the selected value to the parent component through the handle select subscriber
+    //Passing the selected value to the parent component through the onChange subscriber
     onChange(option);
   };
 
@@ -41,7 +56,7 @@ function Dropdown({ options, onChange, value }) {
   });
 
   return (
-    <div className="w-48 relative">
+    <div ref={divEl} className="w-48 relative">
       <Panel
         onClick={handleClick}
         className="flex justify-between items-center cursor-pointer"
