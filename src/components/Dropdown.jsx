@@ -6,7 +6,7 @@ import { FiChevronDown } from "react-icons/fi";
 
 function Dropdown({ options, onChange, value }) {
   //Defining a local piece of state to define if the dropdown is opened or closed - Boolean
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   //Creating a reference to the div that was created by the Dropdown Component - Passed into the main div created by the dropdown
   const divEl = useRef();
