@@ -7,17 +7,11 @@ import {
 
 function ButtonPage() {
   const handleClick = () => console.log("Click");
-  const handleMouseEnter = () => console.log("Mouse enter");
 
   return (
     <div>
       <div className="grid grid-cols-6">
-        <Button
-          className="mb-9"
-          onMouseEnter={handleMouseEnter}
-          onClick={handleClick}
-          inactive
-        >
+        <Button onClick={handleClick} inactive>
           Inactive
         </Button>
 
