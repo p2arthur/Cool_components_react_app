@@ -15,7 +15,7 @@ function Dropdown({ options, onChange, value }) {
   useEffect(() => {
     const documentEventHandler = (event) => {
       //Guard clause in case the ref element doesn't exist anymore
-      if (!divEl) return;
+      if (!divEl.current) return;
 
       //Check if the click happened outside of our referenced element
       if (!divEl.current.contains(event.target)) {
