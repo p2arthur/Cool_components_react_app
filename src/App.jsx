@@ -1,22 +1,26 @@
-import ButtonPage from "./pages/ButtonPage";
+import Route from "./components/Route";
+import Link from "./components/Link";
+
 import AccordionPage from "./pages/AccordionPage";
 import DropdownPage from "./pages/DropdownPage";
-import Link from "./components/Link";
-import { useEffect } from "react";
+import ButtonPage from "./pages/ButtonPage";
 
 function App() {
-  useEffect(() => {
-    const handleClick = () => {
-      console.log("I'm at:", window.location.pathname);
-    };
-
-    window.addEventListener("popstate", handleClick);
-  }, []);
-
   return (
     <div>
-      <DropdownPage />
-      <Link to="home">Go to Home Page</Link>
+      <Link to="/accordion">Go to Accoirdion page</Link>
+      <Link to="/dropdown">Go to dropdown page</Link>
+      <div>
+        <Route path="/accordion">
+          <AccordionPage />
+        </Route>
+        <Route path="/dropdown">
+          <DropdownPage />
+        </Route>
+        <Route path="/buttons">
+          <ButtonPage />
+        </Route>
+      </div>
     </div>
   );
 }
