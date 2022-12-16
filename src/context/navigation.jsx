@@ -28,7 +28,6 @@ function NavigationProvider({ children }) {
   //5) Return a NavigationContext.Provider element to share data across all nested components
   return (
     <NavigationContext.Provider value={{ currentPath, navigate }}>
-      {currentPath}
       {children}
     </NavigationContext.Provider>
   );
