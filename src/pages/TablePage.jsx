@@ -1,4 +1,5 @@
-import Table from "../components/Table";
+//import Table from "../components/Table";
+import SortableTable from "../components/SortableTable";
 
 function TablePage() {
   //Create an array of objects to be displayed inside the table component
@@ -9,14 +10,26 @@ function TablePage() {
     { name: "Lime", color: "bg-green-500", score: 4 },
   ];
 
-  //Create a config array to dinamically pass properties to the table component
+  //Create a config array to dinamically pass properties to the table and sortable table components
   const config = [
-    { label: "Fruits", render: (fruit) => fruit.name },
+    {
+      label: "Fruits",
+      render: (fruit) => fruit.name,
+      //Set a sortValue function to every property that should be sortable
+      sortValue: (fruit) => fruit.name,
+    },
     {
       label: "Color",
-      render: (fruit) => <div className={`p-3 m-2 ${fruit.color}`}></div>,
+      render: (fruit) => (
+        <div className={`p-3 m-2 ${fruit.color} rounded`}></div>
+      ),
     },
-    { label: "Score", render: (fruit) => fruit.score },
+    {
+      label: "Score",
+      render: (fruit) => fruit.score,
+      //Set a sortValue function to every property that should be sortable
+      sortValue: (fruit) => fruit.score,
+    },
   ];
 
   const keyFnHelper = (fruit) => {
@@ -25,7 +38,7 @@ function TablePage() {
 
   return (
     <div>
-      <Table keyFnHelper={keyFnHelper} config={config} data={data} />
+      <SortableTable keyFnHelper={keyFnHelper} config={config} data={data} />
     </div>
   );
 }
