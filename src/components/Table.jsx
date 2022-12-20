@@ -4,11 +4,11 @@ function Table({ config, data, keyFnHelper }) {
   //Mapping through the config prop to dinamically render the label into the table headers
   const renderedHeaders = config.map((column) => {
     //If a header contains a header propertie, we will return it's JSX, else we return the regular header jsx
-    if (column.header)
+    if (column.header) {
       return <Fragment key={column.label}>{column.header()}</Fragment>;
-
+    }
     return (
-      <th className="text-slate-900 text-start" key={column.label}>
+      <th className="text-slate-900" key={column.label}>
         {column.label}
       </th>
     );
