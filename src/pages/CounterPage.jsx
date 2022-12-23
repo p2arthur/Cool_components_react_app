@@ -2,7 +2,9 @@ import Button from "../components/Button";
 import { useReducer } from "react";
 import Panel from "../components/Panel";
 
-const reducer = (state, action) => {};
+const reducer = (state, action) => {
+  return { ...state, count: state.count + 1 };
+};
 
 function CounterPage({ initialCount }) {
   //const [counter, setCounter] = useState(initialCount);
@@ -10,18 +12,16 @@ function CounterPage({ initialCount }) {
 
   //Using reducer instead of useState
   const [state, dispatch] = useReducer(reducer, {
-    counter: initialCount,
+    count: initialCount,
     valueToAdd: 0,
   });
 
   console.log(state);
 
   const incrementCounter = () => {
-    setCounter(counter + 1);
+    dispatch();
   };
-  const decrementCounter = () => {
-    setCounter(counter - 1);
-  };
+  const decrementCounter = () => {};
 
   const handleChange = (event) => {
     const value = parseInt(event.target.value) || 0;
@@ -38,7 +38,7 @@ function CounterPage({ initialCount }) {
   return (
     <Panel className="my-3">
       <div className="flex flex-col items-center">
-        <h2 className="text-3xl">Count is: {state.counter}</h2>
+        <h2 className="text-3xl">Count is: {state.count}</h2>
         <div className="flex">
           <Button onClick={decrementCounter} danger>
             Decrease counter -
