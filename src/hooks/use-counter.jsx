@@ -6,7 +6,9 @@ function useCounter(initialCount) {
 
   useEffect(() => console.log(count), [count]);
 
-  const incrementCounter = () => setCount(count + 1);
+  const incrementCounter = () => {
+    setCount(count + 1);
+  };
 
   return { count, incrementCounter };
 }
