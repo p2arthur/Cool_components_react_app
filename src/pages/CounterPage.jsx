@@ -2,8 +2,25 @@ import Button from "../components/Button";
 import { useReducer } from "react";
 import Panel from "../components/Panel";
 
+const INCREMENT_COUNT = "increment-count";
+const DECREMENT_COUNT = "decrement-count";
+const CHANGE_VALUE_TO_ADD = "change-value-to-add";
+const ADD_VALUES = "add-values";
+
 const reducer = (state, action) => {
-  return { ...state, count: state.count + 1 };
+  if (action.type === INCREMENT_COUNT)
+    return { ...state, count: state.count + 1 };
+
+  if (action.type === DECREMENT_COUNT)
+    return { ...state, count: state.count - 1 };
+
+  if (action.type === CHANGE_VALUE_TO_ADD)
+    return { ...state, valueToAdd: action.payload };
+
+  if (action.type === ADD_VALUES)
+    return { ...state, count: state.count + state.valueToAdd };
+
+  return state;
 };
 
 function CounterPage({ initialCount }) {
@@ -16,21 +33,23 @@ function CounterPage({ initialCount }) {
     valueToAdd: 0,
   });
 
-  console.log(state);
-
   const incrementCounter = () => {
-    dispatch();
+    dispatch({ type: INCREMENT_COUNT });
   };
-  const decrementCounter = () => {};
+  const decrementCounter = () => {
+    dispatch({ type: DECREMENT_COUNT });
+  };
 
   const handleChange = (event) => {
     const value = parseInt(event.target.value) || 0;
 
-    //setValueToAdd(value);
+    dispatch({ type: CHANGE_VALUE_TO_ADD, payload: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch({ type: ADD_VALUES });
+
     //setCounter(counter + valueToAdd);
     //setValueToAdd(0)
   };
