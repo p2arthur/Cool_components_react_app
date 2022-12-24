@@ -5,29 +5,26 @@ import Panel from "../components/Panel";
 const INCREMENT_COUNT = "increment-count";
 const DECREMENT_COUNT = "decrement-count";
 const CHANGE_VALUE_TO_ADD = "change-value-to-add";
-const ADD_VALUES = "add-values";
+const ADD_VALUES_TO_COUNT = "add-values";
 
 const reducer = (state, action) => {
-  if (action.type === INCREMENT_COUNT)
-    return { ...state, count: state.count + 1 };
-
-  if (action.type === DECREMENT_COUNT)
-    return { ...state, count: state.count - 1 };
-
-  if (action.type === CHANGE_VALUE_TO_ADD)
-    return { ...state, valueToAdd: action.payload };
-
-  if (action.type === ADD_VALUES)
-    return { ...state, count: state.count + state.valueToAdd };
-
-  return state;
+  //Using switch to evaluate the action.type of our reducer
+  switch (action.type) {
+    case INCREMENT_COUNT:
+      return { ...state, count: state.count + 1 };
+    case DECREMENT_COUNT:
+      return { ...state, count: state.count - 1 };
+    case CHANGE_VALUE_TO_ADD:
+      return { ...state, valueToAdd: action.payload };
+    case ADD_VALUES_TO_COUNT:
+      return { ...state, count: state.count + state.valueToAdd, valueToAdd: 0 };
+    default:
+      return state;
+  }
 };
 
 function CounterPage({ initialCount }) {
-  //const [counter, setCounter] = useState(initialCount);
-  //const [valueToAdd, setValueToAdd] = useState(0);
-
-  //Using reducer instead of useState
+  //Using reducer instead of useState - produce comes from the immer library
   const [state, dispatch] = useReducer(reducer, {
     count: initialCount,
     valueToAdd: 0,
@@ -48,10 +45,7 @@ function CounterPage({ initialCount }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch({ type: ADD_VALUES });
-
-    //setCounter(counter + valueToAdd);
-    //setValueToAdd(0)
+    dispatch({ type: ADD_VALUES_TO_COUNT });
   };
 
   return (
